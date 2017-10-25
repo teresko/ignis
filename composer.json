@@ -1,0 +1,29 @@
+{
+    "name": "teresko/ignis",
+    "type": "library",
+    "homepage": "https://github.com/teresko/ignis",
+    "license": "BSD-3-Clause",
+    "description": "Asynchronous authentication component",
+    "keywords": ["authentication", "async", "rest", "api"],
+
+    "authors": [
+        {
+        "name": "Mārtiņš Tereško",
+        "email": "martins.teresko@gmail.com",
+        "role": "Developer"
+        }
+    ],
+
+    "require": {
+        "php": ">=7.0",
+        "ext-pdo": "*",
+        "psr/log": "1.*"
+    },
+    "autoload": {
+        "psr-4": { "": "src/" }
+    },
+    "require-dev": {
+        "ext-pdo_sqlite": "*",
+        "phpunit/phpunit": "^6.4"
+    }
+}
