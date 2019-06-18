@@ -25,5 +25,14 @@
     "require-dev": {
         "ext-pdo_sqlite": "*",
         "phpunit/phpunit": "^6.4"
+    },
+
+    "config": {
+        "platform": {
+            "php": "7.0"
+        },
+        "platform-dev": {
+            "php": "7.0"
+        }
     }
 }
