@@ -24,6 +24,7 @@ class Mapper
         $data = [
             'payload' => $identity->getPayload(),
             'account' => $identity->getAccountId(),
+            'token' => $identity->getToken(),
             'createdOn' => null,
             'activatedOn' => null,
         ];
@@ -38,12 +39,12 @@ class Mapper
             $expires = $identity->getActivationTime()->getTimestamp() + $this->burndown;
         }
 
-        $this->storage->set($identity->getToken(), $data, $expires);
+        $this->storage->set($identity->getKey(), $data, $expires);
     }
 
     public function fetch(Entity\Identity $identity)
     {
-        $data = $this->storage->get($identity->getToken());
+        $data = $this->storage->get($identity->getKey());
 
         if (false === $data) {
             throw new Exception\EntityNotFound;
@@ -51,7 +52,11 @@ class Mapper
 
         $identity->setPayload($data['payload']);
         $identity->setAccountId($data['account']);
+        $identity->setToken($data['token']);
         $identity->setCreationTime((new DateTimeImmutable)->setTimestamp($data['createdOn']));
-        $identity->setActivationTime((new DateTimeImmutable)->setTimestamp($data['activatedOn'] ?? time()));
+        
+        if ($data['activatedOn']) {
+            $identity->setActivationTime((new DateTimeImmutable)->setTimestamp($data['activatedOn']));
+        }
     }
 }
